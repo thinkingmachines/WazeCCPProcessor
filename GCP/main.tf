@@ -104,3 +104,59 @@ resource "google_cloudfunctions_function" "process-function" {
     WAZEDATAURL           = "${var.waze_data_url}"
   }
 }
+
+resource "google_bigquery_dataset" "waze_feed_dataset" {
+  dataset_id    = "waze_feed_dataset"
+  friendly_name = "waze feed dataset"
+  description   = "BQ dataset for waze feed data"
+  provider      = "google"
+
+  access {
+    role   = "READER"
+    domain = "thinkingmachin.es"
+  }
+
+  access {
+    role          = "OWNER"
+    user_by_email = "${var.user_email}"
+  }
+}
+
+resource "google_bigquery_table" "alerts" {
+  dataset_id = "${google_bigquery_dataset.waze_feed_dataset.dataset_id}"
+  table_id   = "alerts"
+  provider   = "google"
+
+  time_partitioning {
+    type  = "DAY"
+    field = "startTime"
+  }
+
+  schema = "${file("./schemas/alerts.json")}"
+}
+
+resource "google_bigquery_table" "jams" {
+  dataset_id = "${google_bigquery_dataset.waze_feed_dataset.dataset_id}"
+  table_id   = "jams"
+  provider   = "google"
+
+  time_partitioning {
+    type  = "DAY"
+    field = "startTime"
+  }
+
+  schema = "${file("./schemas/jams.json")}"
+}
+
+resource "google_bigquery_table" "irregularities" {
+  dataset_id = "${google_bigquery_dataset.waze_feed_dataset.dataset_id}"
+  table_id   = "irregularities"
+  provider   = "google"
+
+  time_partitioning {
+    type  = "DAY"
+    field = "startTime"
+  }
+
+  schema = "${file("./schemas/irregularities.json")}"
+}

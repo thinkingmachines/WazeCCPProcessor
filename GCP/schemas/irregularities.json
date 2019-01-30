@@ -1,0 +1,347 @@
+[
+{
+        "fields": [
+          {
+            "mode": "NULLABLE", 
+            "name": "x", 
+            "type": "FLOAT"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "y", 
+            "type": "FLOAT"
+          }
+        ], 
+        "mode": "REPEATED", 
+        "name": "line", 
+        "type": "RECORD"
+      }, 
+      {
+        "fields": [
+          {
+            "mode": "NULLABLE", 
+            "name": "type", 
+            "type": "STRING"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "city", 
+            "type": "STRING"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "reportRating", 
+            "type": "INTEGER"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "street", 
+            "type": "STRING"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "country", 
+            "type": "STRING"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "confidence", 
+            "type": "INTEGER"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "uuid", 
+            "type": "STRING"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "nThumbsUp", 
+            "type": "INTEGER"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "pubMillis", 
+            "type": "INTEGER"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "subtype", 
+            "type": "STRING"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "reliability", 
+            "type": "INTEGER"
+          }, 
+          {
+            "fields": [
+              {
+                "mode": "NULLABLE", 
+                "name": "x", 
+                "type": "FLOAT"
+              }, 
+              {
+                "mode": "NULLABLE", 
+                "name": "y", 
+                "type": "FLOAT"
+              }
+            ], 
+            "mode": "NULLABLE", 
+            "name": "location", 
+            "type": "RECORD"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "magvar", 
+            "type": "INTEGER"
+          }
+        ], 
+        "mode": "NULLABLE", 
+        "name": "causeAlert", 
+        "type": "RECORD"
+      }, 
+      {
+        "fields": [
+          {
+            "mode": "NULLABLE", 
+            "name": "reportDescription", 
+            "type": "STRING"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "type", 
+            "type": "STRING"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "magvar", 
+            "type": "INTEGER"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "city", 
+            "type": "STRING"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "reportRating", 
+            "type": "INTEGER"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "street", 
+            "type": "STRING"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "country", 
+            "type": "STRING"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "confidence", 
+            "type": "INTEGER"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "uuid", 
+            "type": "STRING"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "nThumbsUp", 
+            "type": "INTEGER"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "pubMillis", 
+            "type": "INTEGER"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "subtype", 
+            "type": "STRING"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "roadType", 
+            "type": "INTEGER"
+          }, 
+          {
+            "fields": [
+              {
+                "mode": "NULLABLE", 
+                "name": "x", 
+                "type": "FLOAT"
+              }, 
+              {
+                "mode": "NULLABLE", 
+                "name": "y", 
+                "type": "FLOAT"
+              }
+            ], 
+            "mode": "NULLABLE", 
+            "name": "location", 
+            "type": "RECORD"
+          }, 
+          {
+            "mode": "NULLABLE", 
+            "name": "reliability", 
+            "type": "INTEGER"
+          }
+        ], 
+        "mode": "REPEATED", 
+        "name": "alerts", 
+        "type": "RECORD"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "jamLevel", 
+        "type": "INTEGER"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "delaySeconds", 
+        "type": "INTEGER"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "endTime", 
+        "type": "TIMESTAMP"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "updateDate", 
+        "type": "STRING"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "length", 
+        "type": "INTEGER"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "regularSpeed", 
+        "type": "FLOAT"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "severity", 
+        "type": "INTEGER"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "nThumbsUp", 
+        "type": "INTEGER"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "seconds", 
+        "type": "INTEGER"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "id", 
+        "type": "INTEGER"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "nComments", 
+        "type": "INTEGER"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "nImages", 
+        "type": "INTEGER"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "endNode", 
+        "type": "STRING"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "causeType", 
+        "type": "STRING"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "speed", 
+        "type": "FLOAT"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "alertsCount", 
+        "type": "INTEGER"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "street", 
+        "type": "STRING"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "city", 
+        "type": "STRING"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "startNode", 
+        "type": "STRING"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "driversCount", 
+        "type": "INTEGER"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "trend", 
+        "type": "INTEGER"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "startTimeMillis", 
+        "type": "INTEGER"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "updateDateMillis", 
+        "type": "INTEGER"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "startTime", 
+        "type": "TIMESTAMP"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "country", 
+        "type": "STRING"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "highway", 
+        "type": "BOOLEAN"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "endTimeMillis", 
+        "type": "INTEGER"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "type", 
+        "type": "STRING"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "detectionDate", 
+        "type": "STRING"
+      }, 
+      {
+        "mode": "NULLABLE", 
+        "name": "detectionDateMillis", 
+        "type": "INTEGER"
+      }
+]
