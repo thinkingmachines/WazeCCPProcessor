@@ -42,6 +42,21 @@ data "archive_file" "process_data" {
   }
 }
 
+data "archive_file" "bq_load" {
+  type        = "zip"
+  output_path = "${path.module}/code/cloud-functions/waze-data-bqload.zip"
+
+  source {
+    content  = "${file("${path.module}/code/cloud-functions/waze-data-bqload.js")}"
+    filename = "index.js"
+  }
+
+  source {
+    content  = "${file("${path.module}/code/cloud-functions/package.json")}"
+    filename = "package.json"
+  }
+}
+
 resource "google_storage_bucket_object" "waze-data-download-function" {
   name       = "waze-data-download.zip"
   bucket     = "${google_storage_bucket.bucket.name}"
@@ -54,6 +69,13 @@ resource "google_storage_bucket_object" "waze-data-process-function" {
   bucket     = "${google_storage_bucket.processed_bucket.name}"
   source     = "${data.archive_file.process_data.output_path}"
   depends_on = ["data.archive_file.process_data"]
+}
+
+resource "google_storage_bucket_object" "waze-data-bqload-function" {
+  name       = "waze-data-bqload.zip"
+  bucket     = "${google_storage_bucket.processed_bucket.name}"
+  source     = "${data.archive_file.bq_load.output_path}"
+  depends_on = ["data.archive_file.bq_load"]
 }
 
 resource "google_cloudfunctions_function" "download-function" {
@@ -70,6 +92,7 @@ resource "google_cloudfunctions_function" "download-function" {
   labels {
     my-label = "waze-processor"
   }
+
 
   environment_variables {
     DATA_BUCKET           = "${var.waze_raw_bucket_name}"
@@ -101,7 +124,28 @@ resource "google_cloudfunctions_function" "process-function" {
   environment_variables {
     DATA_BUCKET           = "${var.waze_raw_bucket_name}"
     PROCESSED_DATA_BUCKET = "${var.waze_processed_bucket_name}"
-    WAZEDATAURL           = "${var.waze_data_url}"
+  }
+}
+
+resource "google_cloudfunctions_function" "bqload-function" {
+  name                  = "bqload-function"
+  description           = "load processed waze data to bigquery"
+  available_memory_mb   = 128
+  source_archive_bucket = "${google_storage_bucket.processed_bucket.name}"
+  source_archive_object = "${google_storage_bucket_object.waze-data-bqload-function.name}"
+  timeout               = 60
+  entry_point           = "bqLoad"
+  provider              = "google"
+
+  # see https://github.com/terraform-providers/terraform-provider-google/issues/2409 for notes on the `event_trigger` block
+  event_trigger {
+    event_type = "providers/cloud.storage/eventTypes/object.change"
+    resource   = "${google_storage_bucket.processed_bucket.name}"
+  }
+
+  environment_variables {
+    PROCESSED_DATA_BUCKET = "${var.waze_processed_bucket_name}"
+    DATASET = "waze_feed_dataset"
   }
 }
 
