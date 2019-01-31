@@ -12,6 +12,12 @@ resource "google_storage_bucket" "processed_bucket" {
   storage_class = "REGIONAL"
 }
 
+resource "google_pubsub_topic" "waze-topic" {
+  name    = "${var.topic_name}"
+  provider = "google"
+}
+
+
 data "archive_file" "http_trigger" {
   type        = "zip"
   output_path = "${path.module}/code/cloud-functions/waze-data-download.zip"
@@ -84,10 +90,14 @@ resource "google_cloudfunctions_function" "download-function" {
   available_memory_mb   = 128
   source_archive_bucket = "${google_storage_bucket.bucket.name}"
   source_archive_object = "${google_storage_bucket_object.waze-data-download-function.name}"
-  trigger_http          = true
   timeout               = 60
   entry_point           = "downloadData"
   provider              = "google"
+
+  event_trigger {
+    event_type = "providers/cloud.pubsub/eventTypes/topic.publish"
+    resource   = "${google_pubsub_topic.waze-topic.name}"
+  }
 
   labels {
     my-label = "waze-processor"
