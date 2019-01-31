@@ -1,0 +1,5 @@
+cron:
+- description: trigger waze-ccp-processor
+  url: /publish/waze_ccp_processor
+  target : waze-ccp-processor
+  schedule: every 2 minutes
