@@ -10,16 +10,13 @@ log into your GCP console.
     navigate to the IAM and admin panel for your newly created project. Select service accounts from the menu on the left. Enter a name and ID for your service account.
 
 2. Grant the following permissions to your service account
-#check if you really need owner permissions
+
     Storage Admin
     BigQuery Admin
     Cloud Functions Developer
-    Pub/Sub admin
+    Project Owner (we will remove this role later)
 
-3. Grant Users Access to service account (Optional)
-    - the creator of the project will already have project owner rights (and therefore access to the service account)
-
-4. Create a key and note its location for later account.json
+3. Create a key and note its location for later account.json
 
 click done to finish the service account creation dialog
 
@@ -35,6 +32,7 @@ click done to finish the service account creation dialog
 
     set `waze_data_url` to the url of your waze feed
     set `user_email` to your email
+    set `service_account_email` to the email of the service account you created
     set `waze_raw_bucket_name` note: this value must be globally unique
     set `gcp-wazeccpprocessor-processed` note: this value must be globally unique
     optional: change the bucket_location or dataset name
@@ -57,8 +55,10 @@ click done to finish the service account creation dialog
 2. set your default gcloud sdk credentials by executing `gcloud auth login application-default` at the command line
     
 ### Create App Engine service and configure cron
-1. go to `GCP/app_engine` and execute `gcloud app deploy`
-2. Once the app finishes deploying execute `gcloud app browse -s waze-ccp-processor` to check that it's running properly
-3. Run `gcloud app deploy cron.yaml` to set the cron job to run your cloud function every 2 minutes
+1. Go to `GCP/app_engine` and execute `gcloud app deploy`
+2. Choose a region for your app engine application to be deployed in
+3. Once the app finishes deploying execute `gcloud app browse` to check that it's running properly
+4. Run `gcloud app deploy cron.yaml` to set the cron job to run your cloud function every 2 minutes
 
 ###Cleanup
+1. navigate back to the iam page and remove the project owner permission from the service account
