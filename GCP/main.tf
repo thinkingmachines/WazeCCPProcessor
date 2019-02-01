@@ -13,10 +13,9 @@ resource "google_storage_bucket" "processed_bucket" {
 }
 
 resource "google_pubsub_topic" "waze-topic" {
-  name    = "${var.topic_name}"
+  name     = "${var.topic_name}"
   provider = "google"
 }
-
 
 data "archive_file" "http_trigger" {
   type        = "zip"
@@ -103,7 +102,6 @@ resource "google_cloudfunctions_function" "download-function" {
     my-label = "waze-processor"
   }
 
-
   environment_variables {
     DATA_BUCKET           = "${var.waze_raw_bucket_name}"
     PROCESSED_DATA_BUCKET = "${var.waze_processed_bucket_name}"
@@ -155,7 +153,7 @@ resource "google_cloudfunctions_function" "bqload-function" {
 
   environment_variables {
     PROCESSED_DATA_BUCKET = "${var.waze_processed_bucket_name}"
-    DATASET = "waze_feed_dataset"
+    DATASET               = "waze_feed_dataset"
   }
 }
 
@@ -166,8 +164,8 @@ resource "google_bigquery_dataset" "waze_feed_dataset" {
   provider      = "google"
 
   access {
-    role   = "READER"
-    domain = "thinkingmachin.es"
+    role          = "OWNER"
+    user_by_email = "${var.service_account_email}"
   }
 
   access {
