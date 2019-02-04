@@ -1,4 +1,4 @@
-exports.downloadData = function (res, req) {
+exports.downloadData = function (event, callback) {
   const fetch = require('node-fetch');
   const { Storage } = require('@google-cloud/storage');
   const storage = new Storage();
@@ -15,18 +15,18 @@ exports.downloadData = function (res, req) {
         });
 
         stream.on('error', (err) => {
-          next(err);
+          callback(err);
         });
 
         stream.on('finish', () => {
-          res.send('OK');
+          callback(null, 'OK');
         });
 
         stream.end(buffer);
       }).catch(err => {
-        next(err);
+        callback(err);
       })
   ).catch(err => {
-    next(err);
+    callback(err);
   });
 }
