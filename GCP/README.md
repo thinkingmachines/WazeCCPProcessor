@@ -16,7 +16,7 @@ log into your GCP console.
     Cloud Functions Developer
     Project Owner (we will remove this role later)
 
-3. Create a key and note its location for later account.json
+3. Create a key and note its location for later.
 
 click done to finish the service account creation dialog
 
@@ -27,7 +27,7 @@ click done to finish the service account creation dialog
 ### Download Git Repo Code and Configure
 1. Download this repo to a folder on your computer.
 2. copy your key json file to the GCP directory and rename it to account.json
-3. go to GCP/providers.tf and add your project name and a default region to the config
+3. go to GCP/providers.tf and add your project name and a default region (e.g. us-east1) to the config
 4. edit variables.tf and make the following changes
 
     set `waze_data_url` to the url of your waze feed
@@ -49,6 +49,12 @@ click done to finish the service account creation dialog
     - `terraform init`
     - `terraform plan`
     - `terraform apply`
+
+### Change cloud function service account
+navigate to the cloud functions page for your project and click on the `bq-load` function
+click 'edit' and navigate to the bottom of the page. Click 'more' at the bottom of the page to view more options.
+Select the service account you created from the service account drop down, and click 'save' to update your settings.
+
 
 ###GCloud setup
 1. install the [gcloud SDK](https://cloud.google.com/sdk/install)
